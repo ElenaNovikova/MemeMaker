@@ -21,7 +21,7 @@
     <input type="file" id="file" />
   </div>
   <div id="image-container">
-    <canvas width="500" height="500"></canvas>
+    <canvas></canvas>
     <div>
       <span>Top Line:</span><br/>
       <input id="topLineText" type="text"><br/>
@@ -50,24 +50,26 @@
       var ctx = canvas.getContext("2d");
       // Your code here
       if (image != null)
-          ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+          canvas.width = image.width;
+          canvas.height = image.height;
+          ctx.drawImage(image, 0, 0, image.width, image.height);
 
       ctx.font = '48px Impact';
       ctx.textAlign = 'center';
 
-      ctx.fillStyle = 'black';
-      ctx.fillText(topLineText, canvas.width / 2, 100);
-
-      //ctx.strokeStyle = 'black';
-      //ctx.lineWidth   = 3;
-      //ctx.strokeText(topLineText, canvas.width / 2, 100);
-
       ctx.fillStyle = 'white';
-      ctx.fillText(bottomLineText, canvas.width / 2, 400);
+      ctx.fillText(topLineText, canvas.width / 2, 80);
 
       ctx.strokeStyle = 'black';
       ctx.lineWidth   = 3;
-      ctx.strokeText(bottomLineText, canvas.width / 2, 400);
+      ctx.strokeText(topLineText, canvas.width / 2, 80);
+
+      ctx.fillStyle = 'white';
+      ctx.fillText(bottomLineText, canvas.width / 2, (canvas.height - canvas.height / 10));
+
+      ctx.strokeStyle = 'black';
+      ctx.lineWidth   = 3;
+      ctx.strokeText(bottomLineText, canvas.width / 2, (canvas.height - canvas.height / 10));
     }
 
     function saveFile() {
